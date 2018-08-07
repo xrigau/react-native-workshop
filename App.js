@@ -1,13 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native';
+
+
+const todos = [
+  {
+    name: "Take the dog out"
+  },
+  {
+    name: "Buy potato chips"
+  },
+  {
+    name: "Become millionaire"
+  }
+]
+
+const TodoItem = ({ name }) => (
+  <Text>{name}</Text>
+)
+
+const TodoList = ({ items }) => (
+  <FlatList
+    data={items}
+    renderItem={({ item }) => (<TodoItem name={item.name} />)}
+    keyExtractor={(item) => item.name}
+    />
+)
 
 export default class App extends React.Component {
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <SafeAreaView>
+          <TodoList items={todos} />
+        </SafeAreaView>
       </View>
     );
   }
